@@ -67,6 +67,10 @@
             </div>
         </div>
 
+        <div class="task-actions">
+            <a href="edit.php?id=<?php echo $task['id']; ?>" class="btn btn-primary">Taak aanpassen</a>
+        </div>
+
     </div>
 
 </body>
