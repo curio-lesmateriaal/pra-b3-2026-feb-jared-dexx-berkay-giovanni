@@ -10,19 +10,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         die("Alle verplichte velden moeten ingevuld zijn.");
     }
 
-    // $id = $_POST['id'];
+    $id = $_POST['id'];
     $titel = trim($_POST['titel']);
     $beschrijving = trim($_POST['beschrijving']);
     $afdeling = trim($_POST['afdeling']);
-    // $status = $_POST['status'];
-    // $deadline = !empty($_POST['deadline']) ? $_POST['deadline'] : null;
-    // $user = !empty($_POST['user']) ? $_POST['user'] : null;
+    $status = $_POST['status'];
+    $deadline = !empty($_POST['deadline']) ? $_POST['deadline'] : null;
+    $user = !empty($_POST['user']) ? $_POST['user'] : null;
 
     // Validate status value
-    // $allowedStatuses = ['todo', 'bezig', 'klaar'];
-    // if (!in_array($status, $allowedStatuses)) {
-    //     die("Ongeldige status waarde.");
-    // }
+    $allowedStatuses = ['todo', 'bezig', 'klaar'];
+    if (!in_array($status, $allowedStatuses)) {
+        die("Ongeldige status waarde.");
+    }
 
     // Validate user exists if provided
     if ($user !== null) {
