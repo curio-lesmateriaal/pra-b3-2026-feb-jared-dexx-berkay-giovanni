@@ -72,5 +72,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
+// Handle task creation
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update') {
+    $titel = $_POST['titel'];
+    if (empty($titel)) {
+        die("Titel is verplicht");
+    }
+    $beschrijving = $_POST['beschrijving'];
+    if (empty($beschrijving)) {
+        die("Beschrijving is verplicht");
+    } 
+    $afdeling = $_POST['afdeling'];
+    if (empty($afdeling)) {
+        die("Afdeling is verplicht");
+    }
+    echo $titel . " / " . $beschrijving . " / " . $afdeling;
+    require_once 'conn.php';
+
+    $query = "INSERT INTO taken (titel, beschrijving, afdeling)
+    VALUES(:titel, :beschrijving, :afdeling)";
+
+    $statement = $conn->prepare($query);
+
+    $statement->execute([
+        ":titel" => $titel,
+        ":beschrijving" => $beschrijving,
+        ":afdeling" => $afdeling
+    ]);
+    header("Location: ../tasks/index.php?msg=Melding aangepast");
+}
+
 // If not a valid POST request, redirect to index
 header("Location: ../index.php");
